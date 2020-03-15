@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  zlib:
+    image: zlib:1.2.11
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - boost_version=1.72.0
+        - num_cores=1

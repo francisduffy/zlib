@@ -24,3 +24,7 @@
 /configure.log
 
 .DS_Store
+
+**/*.vcxproj.user
+**/.vs
+contrib/vstudio/vc14/x64
