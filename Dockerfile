@@ -1,5 +1,5 @@
-ARG boost_version=latest
-FROM build_env_boost:${boost_version}
+ARG tag=latest
+FROM debian:${tag}
 
 MAINTAINER Francis Duffy
 LABEL Description="Build zlib."
@@ -10,7 +10,12 @@ ARG num_cores
 # Exclusions are performed by .dockerignore
 COPY . /zlib
 
-RUN cd /zlib \
+RUN apt-get update \
+  && apt-get upgrade -y \
+  && apt-get install -f -y build-essential dos2unix \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* \
+  && cd /zlib \
   && find -regex ".*\.\(sh\|in\|ac\|am\)" -exec dos2unix {} ';' \
   && dos2unix configure \
   && ./configure \
