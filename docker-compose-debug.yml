@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  zlib:
+    image: zlib_debug:1.2.11
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - num_cores=1
+        - build_type=debug
