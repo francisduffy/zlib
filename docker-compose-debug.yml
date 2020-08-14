@@ -5,7 +5,7 @@ services:
     image: zlib_debug:1.2.11
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-Debug
       args:
         - num_cores=1
-        - build_type=debug
+        - boost_version=1.72.0

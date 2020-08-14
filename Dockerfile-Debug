@@ -1,28 +1,22 @@
-ARG tag=latest
-FROM debian:${tag}
+ARG boost_version=latest
+FROM build_env_boost_debug:${boost_version}
 
 MAINTAINER Francis Duffy
-LABEL Description="Build zlib."
+LABEL Description="Build zlib debug."
 
 # Argument for number of cores to use while building
 ARG num_cores
 
 # Exclusions are performed by .dockerignore
-COPY . /zlib
+COPY . /lib_src/zlib
 
-RUN apt-get update \
-  && apt-get upgrade -y \
-  && apt-get install -f -y build-essential dos2unix \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/* \
-  && cd /zlib \
+RUN cd /lib_src/zlib \
   && find -regex ".*\.\(sh\|in\|ac\|am\)" -exec dos2unix {} ';' \
   && dos2unix configure \
-  && ./configure \
+  && CFLAGS="-O0 -g" ./configure --debug \
   && make -j ${num_cores} \
   && make install \
   && cd / \
-  && rm -rf zlib \
   && ldconfig
 
 CMD bash
