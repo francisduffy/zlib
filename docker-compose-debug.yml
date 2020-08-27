@@ -8,4 +8,3 @@ services:
       dockerfile: Dockerfile-Debug
       args:
         - num_cores=1
-        - boost_version=1.72.0

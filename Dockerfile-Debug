@@ -1,5 +1,5 @@
-ARG boost_version=latest
-FROM build_env_boost_debug:${boost_version}
+ARG ore_plus_version=latest
+FROM env_ore_plus_debug:${ore_plus_version}
 
 MAINTAINER Francis Duffy
 LABEL Description="Build zlib debug."
